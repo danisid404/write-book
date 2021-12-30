@@ -1,0 +1,16 @@
+<!-- Initiate the recursive template rendering. -->
+<ng-container *ngFor="let section of book" [ngTemplateOutlet]="sectionTemplateRef"
+    [ngTemplateOutletContext]="{ section: section }">
+</ng-container>
+
+<!-- Define the recursive template. -->
+<ng-template #sectionTemplateRef let-section="section">
+    <div class="border-l-2 mt-10 ml-[50px]">
+        <app-section [title]="section.title"></app-section>
+        <!-- Invoke the recursive template. -->
+        <ng-container *ngFor="let subSection of section.subSections" [ngTemplateOutlet]="sectionTemplateRef"
+            [ngTemplateOutletContext]="{ section: subSection }">
+        </ng-container>
+        
+    </div>
+</ng-template>
